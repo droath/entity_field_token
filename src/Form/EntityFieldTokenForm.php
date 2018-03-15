@@ -168,6 +168,9 @@ class EntityFieldTokenForm extends EntityForm {
         ];
 
         if (!empty($entity_type)) {
+          if (strpos($entity_type, 'taxonomy_') !== FALSE) {
+            $entity_type = substr($entity_type, 9);
+          }
           $form['token_value']['token_tree']['#token_types'] = [$entity_type];
         }
       }
