@@ -102,16 +102,20 @@ class EntityFieldTokenForm extends EntityForm {
         '#multiple' => TRUE,
         '#required' => TRUE,
       ];
-      $form['configurations']['view_modes'] = [
-        '#type' => 'select',
-        '#title' => $this->t('View Modes'),
-        '#description' => $this->t('Select the view modes on which the field 
-        token will be attached.'),
-        '#options' => $this->getEntityViewModesOptions($entity_type),
-        '#multiple' => TRUE,
-        '#required' => TRUE,
-        '#default_value' => $this->entity->view_modes,
-      ];
+      $view_mode_options = $this->getEntityViewModesOptions($entity_type);
+
+      if (!empty($view_mode_options)) {
+        $form['configurations']['view_modes'] = [
+          '#type' => 'select',
+          '#title' => $this->t('View Modes'),
+          '#description' => $this->t('Select the view modes on which the field 
+          token will be attached. If none are selected, then all views modes 
+          will display the field token.'),
+          '#options' => $this->getEntityViewModesOptions($entity_type),
+          '#multiple' => TRUE,
+          '#default_value' => $this->entity->view_modes,
+        ];
+      }
     }
     $form['token_value'] = [
       '#type' => 'fieldset',

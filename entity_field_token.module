@@ -115,7 +115,7 @@ function entity_field_token_field_token_elements(EntityInterface $entity, $view_
     $view_modes = $definition->view_modes;
 
     // Filter out field token element by entity display view mode.
-    if (empty($view_modes) || !in_array($view_mode, $view_modes)) {
+    if (!empty($view_modes) && !in_array($view_mode, $view_modes)) {
       continue;
     }
 
